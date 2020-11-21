@@ -1,5 +1,5 @@
 # 安装：
-sudo apt install catimg python3 python3-pip
+sudo apt install catimg python3 python3-pip -y
 python3 -m pip install -U pip
 python3 -m pip install matplotlib
 # 运行

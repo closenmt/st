@@ -5,15 +5,15 @@ import termios,fcntl,struct,datetime
 h, _ = struct.unpack('hh', fcntl.ioctl(1, termios.TIOCGWINSZ, '1234'))
 def execute(cmd):
     popen = subprocess.Popen(cmd, stdout=subprocess.PIPE, universal_newlines=True)
-    i=0
+    i=1
     with open("log.txt",mode="a+") as f:
         for stdout_line in iter(popen.stdout.readline, ""):
-            if i==2:
+            if i==3:
                 dd=stdout_line.split(" ")
                 f.write(f"{dd[-2]},{datetime.datetime.now()}\n")
                 print(dd[-2],datetime.datetime.now())
-            elif i==h-1:
-                i=0
+            elif i==h:
+                i=1
             i+=1
             pass
     popen.stdout.close()
