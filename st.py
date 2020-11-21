@@ -4,12 +4,12 @@ import subprocess
 import datetime
 def execute(cmd):
     popen = subprocess.Popen(cmd, stdout=subprocess.PIPE, universal_newlines=True)
-    with open("log.txt",mode="a+") as f:
-        for stdout_line in iter(popen.stdout.readline, ""):
-            if stdout_line.startswith("%Cpu"):
-                dd=stdout_line.split(" ")
+    for stdout_line in iter(popen.stdout.readline, ""):
+        if stdout_line.startswith("%Cpu"):
+            dd=stdout_line.split(" ")
+            with open("log.txt",mode="a+") as f:
                 f.write(f"{dd[-2]},{datetime.datetime.now()}\n")
-                print(dd[-2],datetime.datetime.now())
+            print(dd[-2],datetime.datetime.now())
     popen.stdout.close()
     return_code = popen.wait()
     if return_code:
